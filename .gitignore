@@ -10,6 +10,7 @@ langcahin/books
 notes
 
 langcahin/.env
+langsmith/.env
 .env
 
 langcahin/my_chroma_db
