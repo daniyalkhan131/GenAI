@@ -5,8 +5,12 @@ from langchain_community.tools import DuckDuckGoSearchRun
 from langchain.agents import create_react_agent, AgentExecutor
 from langchain import hub
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
+
+weather_api_key = os.getenv("WEATHER_STACK_API_KEY")
+os.environ['LANGCHAIN_PROJECT']= 'ReAct_Agent'
 
 search_tool = DuckDuckGoSearchRun()
 
@@ -15,7 +19,7 @@ def get_weather_data(city: str) -> str:
   """
   This function fetches the current weather data for a given city
   """
-  url = f'https://api.weatherstack.com/current?access_key=f07d9636974c4120025fadf60678771b&query={city}'
+  url = f'https://api.weatherstack.com/current?access_key={weather_api_key}&query={city}'
 
   response = requests.get(url)
 
@@ -46,7 +50,7 @@ agent_executor = AgentExecutor(
 # Identify the birthplace city of Kalpana Chawla (search) and give its current temperature.
 
 # Step 5: Invoke
-response = agent_executor.invoke({"input": "What is the current temp of gurgaon"})
+response = agent_executor.invoke({"input": "What is the release date of Dhadak 2?"})
 print(response)
 
 print(response['output'])
